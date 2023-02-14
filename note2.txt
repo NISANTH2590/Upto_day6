@@ -1,0 +1,155 @@
+1.temporal deadzone
+ A temporal dead zone (TDZ) is the area of a block where a variable is inaccessible until the moment the computer completely initializes it with a value.
+
+2.Property flags
+ property flags includes 
+
+3.promisification
+function , callback , promises
+
+4.prototyping
+psrent will inherit child 
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Array Buffer :
+ The basic binary object is array buffer - a reference to fixed length of contiguous memory area;
+
+ let buffer = new ArrayBuffer(16);
+ console.log(buffer.byteLength); //16
+
+It has a fixed length, we can’t increase or decrease it.
+It takes exactly that much space in the memory.
+To access individual bytes, another “view” object is needed, not buffer[index].
+ArrayBuffer is Just a raw sequence of bytes.
+To manipulate an ArrayBuffer, we need to use a “view” object.
+A view object does not store anything on its own. It’s the “eyeglasses” that give an interpretation of the bytes stored in the ArrayBuffer.
+
+Uint8Array – treats each byte in ArrayBuffer as a separate number, with possible values from 0 to 255 (a byte is 8-bit, so it can hold only that much). Such value is called a “8-bit unsigned integer”.
+Uint16Array – treats every 2 bytes as an integer, with possible values from 0 to 65535. That’s called a “16-bit unsigned integer”.
+Uint32Array – treats every 4 bytes as an integer, with possible values from 0 to 4294967295. That’s called a “32-bit unsigned integer”.
+Float64Array – treats every 8 bytes as a floating point number with possible values from 5.0x10-324 to 1.8x10308
+
+
+Typed Array methods :
+We can iterate, map, slice, find, reduce etc.
+
+No splice – we can’t “delete” a value, because typed arrays are views on a buffer, and these are fixed, contiguous areas of memory. All we can do is to assign a zero.
+No concat method.
+
+There are two additional methods:
+arr.set(fromArr, [offset]) copies all elements from fromArr to the arr, starting at position offset (0 by default).
+arr.subarray([begin, end]) creates a new view of the same type from begin to end (exclusive). That’s similar to slice method (that’s also supported), but doesn’t copy anything – just creates a new view, to operate on the given piece of data.
+
+TEXT ENCODER AND DECODER : 
+Text decoder converts the bytes into string .
+let decoder = new TextDecoder([label],[options]);
+let uint8array = new Uint8Array([72, 101, 108, 108, 111]);
+console.log(TextDecoder().decode(uint8array)); //Hello
+
+Text encoder converts the string into bytes.
+let encoder = new TextEncoder();
+console.log(encoder.encode("Hello)); //72, 101, 108, 108, 111
+
+BLOB :
+blob is an array of blob/buffersource/string values.
+type of blob usually Eg : img/png
+
+the image can be converted into blob;
+blob can be also used as the url;
+blob can be also used as the text where the input string will be converted into ann utf8 format
+blob can be used as the array buffer.
+let us consider if we are writing and using the blob more than 2gb.If we use under the array buffer means it will lead to an tedious work.
+here comes the use of an stream
+
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ES6 Features :
+
+Let , const, Arrow functions, For/Of , Map ,Set , WeakMap , WeakSet, 
+Spread operator(...)
+
+IsFinite() // returns true if it a finite value.
+IsNaN() // returns true if it is not a number.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+Array methods :
+Array.find(value); // This is used to find the element is available or not .
+Array.findIndex(value); // This is used to find the whether the array value is present in the given array or not. 
+Array.Keys(); // This will return the keys in a array.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+Math Functions : 
+Math.trunc() // This will return the integer part of the variable given. Like the integer in C programming.
+Math.sign() // This will return -1 if the number if negative , it returns 0 if the number is null, it returns 1 if the number is positive. , if undefined => NaN is returned.
+Math.cbrt() // cube root of x;
+Math.log2() //base2 log of x;
+Math.log10() //base10 log of x;
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+For/of will return the values available in the iterable object.
+const mypromise = return new Promise((res,rej)=>{
+    console.log("Hi");
+})
+
+mypromise.then((res,err)=>{
+    console.log("Hello");
+});
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+object.entries // it returns the keys and the values in the object.
+Modules // this will help in importing and exporting the data or values from one file to another files.
+we can use module.exports = variable // here the variable that we are trying to export will take place.
+we can use import variable = require("/path of the file");
+
+we can also export it using export keyword as follows:
+file.js
+let a = 10;
+let name = "Nishanth";
+export{a,name};
+
+file1.js
+import{a,name}from "file1.js"
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Eval :
+The Eval is used to evaluate a code of string .
+when we trying to run a command declared into a form of string the eval can be used to find its meaning.
+it starts to execute in a lexicographical environment;
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+Proxy :
+let proxy = new Proxy(target,handler);
+
+target = can be anything including functions;
+
+proxy is a thing that acts as a wrapper for an object. Intercept with the object and the operations that need to be performed with the object. 
+the target will have the object that we are going to access.
+the handler will have the handling functions that weare going to perform with the proxy.
+
+Reflect :
+Reflect is a built-in object that simplifies creation of Proxy.
+
+It was said previously that internal methods, such as [[Get]], [[Set]] and others are specification-only, they can’t be called directly.
+
+The Reflect object makes that somewhat possible. Its methods are minimal wrappers around the internal methods.
+
+let user = {};
+
+Reflect.set(user, 'name', 'John');
+
+alert(user.name); // John
+
+Get:
+let user = {
+  _name: "Guest",
+  get name() {
+    return this._name;
+  }
+};
+
+let userProxy = new Proxy(user, {
+  get(target, prop, receiver) {
+    return target[prop];
+  }
+});
+
+alert(userProxy.name); // Guest

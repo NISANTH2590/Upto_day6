@@ -1,0 +1,250 @@
+This object exposes, among many others, the on and emit methods.
+
+ => emit is used to trigger an event
+ => on is used to add a callback function that's going to be executed when the event is triggered.
+
+let eventemitter = require('events');
+let event = new eventemitter();
+event.on('start',name=>{
+    console.log("Hi NIsh"+`${name}`)
+})
+event.emit('start',"Nishanth");
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+EXPRESS :
+
+express methods 
+Get,put,post,use,all,listen,delete
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+three methods in promise : pending,fulfilles,rejected
+
+
+Promise methods :
+Promise.all()
+Promise.allSettled()
+Promise.any()
+Promise.prototype.catch()
+Promise.prototype.finally()
+Promise.race()
+Promise.reject()
+Promise.resolve()
+Promise.prototype.then()
+
+let func1 = new Promise((response,reject)=>{
+    resolve("Hello");
+});
+func1.then((val)=>{
+    console.log(val);
+});
+
+const promise1 = Promise.resolve(3);
+const promise2 = 42;
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, 'foo');
+});
+
+Promise.all([promise1, promise2, promise3]).then((values) => {
+  console.log(values);
+});
+
+Express parsers
+Body parser - this is used to parse the body datas like Rawtext,url,JSON,URL encoded form
+multer - this is used to handle multi/form data;
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Async,Await,Fetch : 
+
+async function fetchdata(){
+  const url = "https://localhost:3000//fllo/"
+  const result = await fetch(url).then((res)=>{
+    console.log(res);
+  }) 
+}
+
+fetchdata().then(res =>{
+  console.log(res.image)
+})
+.catch(err =>{
+  console.log(error);
+})
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+EVENTS AND EVENT EMITTERS:
+events are things that will be happend whenever an operation is performed.eventshandlers are used to handle events and the functions that are need to be performed when an event is triggered.
+the event emitters are similiar to event handlers where they also used to handle events whenever an event is triggerted.the Emit and on are the two methods used in the event emitter.
+the emit can be used to trigger an event and the on method canbe used when an event is triggered we can capture it and perform an operation or function on that if we want.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Closures:
+A closure is the combination of a function bundled together (enclosed) with references to its surrounding state (the lexical environment).
+In other words, a closure gives you access to an outer function's scope from an inner function. In JavaScript, closures are created every time a function is created, at function creation time.
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Sequelize :
+
+Migrations  
+A Migration in Sequelize is a javascript file which exports two functions, up and down, that dictates how to perform the migration and undo it. 
+You define those functions manually, but you don't call them manually; they will be called automatically by the CLI.
+
+commands : npm i sequelize
+commands : npx sequelize-cli init
+
+the sequlize-cli will create the following folders 
+-> Models - For the routing methods
+-> Config - here the database configuration will be done.The database connection will be required.//USERNAME,PASSWORD,DATABASE,HOST,DIALECT
+-> migrations - here the migrations takes place .The migrations generally will have the top and bottom functionsof the code
+-> Seeders - If we want to insert some data defaultly to some of the data base table means we will use seeders.
+
+MIGRATION CONCEPTS AND COMMANDS :
+
+A migration file contains code to apply the changes, and code to remove the changes again. With that format, it's possible to switch (migrate) between one set of changes and another pretty seamlessly.
+Again, there are tons of modules out there that provide database migrations for node.
+
+COMMAND TO CREATE MIGRATION : 
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
+COMMAND TO Running Migrations:
+npx sequelize-cli db:migrate
+COMMAND TO UNDOING MIGRATIONS :
+To undo a single migration :
+npx sequelize-cli db:migrate:undo
+To undo all migration :
+npx sequelize-cli db:migrate:undo:all --to XXXXXXXXXXXXXX-create-posts.js
+
+SEEDERS COMMANDS :
+
+
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Mysql root user changed command :
+:
+sudo mysql -u root # I had to use "sudo" since it was a new installation
+
+mysql> USE mysql;
+mysql> UPDATE user SET plugin='mysql_native_password' WHERE User='root';
+mysql> FLUSH PRIVILEGES;
+mysql> exit;
+
+sudo service mysql restart
+
+https://stackoverflow.com/questions/39281594/error-1698-28000-access-denied-for-user-rootlocalhost
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+Creating databases
+
+https://docs.rackspace.com/support/how-to/install-mysql-server-on-the-ubuntu-operating-system/
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Add a database user
+When applications connect to the database using the root user, they usually have more privileges than they need. You can add users that applications can use to connect to the new database. In the following example, a user named demouser is created.
+
+To create a new user, run the following command in the mysql shell:
+
+INSERT INTO mysql.user (User,Host,authentication_string,ssl_cipher,x509_issuer,x509_subject)
+VALUES('demouser','localhost',PASSWORD('demopassword'),'','','');
+When you make changes to the user table in the mysql database, tell MySQL to read the changes by flushing the privileges, as follows:
+
+FLUSH PRIVILEGES;
+Verify that the user was created by running a SELECT query again:
+
+SELECT User, Host, authentication_string FROM mysql.user;
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+root user login and password :
+
+/usr/bin/mysql -u root -p
+password:' ' //just a space , this is for root user password
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+nisanth user login and password;
+
+mysql -u nisanth -p
+password
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+DATABASE commands :
+
+https://dev.mysql.com/doc/mysql-getting-started/en/
+
+
+creating a table with id,email,password:
+CREATE TABLE users(id INT unsigned NOT NULL AUTO_INCREMENT,email VARCHAR(
+30) NOT NULL,password VARCHAR(60) NOT NULL,PRIMARY KEY(id));
+
+By using variables in sql query:
+connection.query('SELECT * FROM accounts WHERE username = ? AND password = ?', [username, password]
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+Express :
+
+there will be three arguments that are returned form express(req,res,next);
+the (err) object is used when an error occurs in the execution of the function.
+The next parameter is used to call a function after the execution of the current function.
+Example:
+
+function func1(req,res,next){
+console.log("Hi");
+next();
+}
+function func2(req,res,next){
+  console.log("hello");
+}
+app.get('/',func1,func2);
+
+After the execution of the function func1 the nextmiddleware is called so that the next function in the app.get will be exectuted.
+If it doesn't get called means the func1 will alone get executed.
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Cookie :
+A cookie is a piece of data that is attached by the servers in the users browser whenever the user is viewing the web page.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+The two mechanisms within Web Storage are as follows:
+
+sessionStorage maintains a separate storage area for each given origin that's available for the duration of the page session (as long as the browser is open, including page reloads and restores).
+localStorage does the same thing, but persists even when the browser is closed and reopened.
+
+SessionStorage :
+Saving text between refreshes
+The following example autosaves the contents of a text field, and if the browser is refreshed, restores the text field content so that no writing is lost.
+
+EXAMPLE : 
+// Get the text field that we're going to track
+let field = document.getElementById("field");
+
+// See if we have an autosave value
+// (this will only happen if the page is accidentally refreshed)
+if (sessionStorage.getItem("autosave")) {
+  // Restore the contents of the text field
+  field.value = sessionStorage.getItem("autosave");
+}
+
+// Listen for changes in the text field
+field.addEventListener("change", () => {
+  // And save the results into the session storage object
+  sessionStorage.setItem("autosave", field.value);
+});
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Express Session :
+Example:
+app.use(session({
+   secret : "This is a secret key",
+   resave : false,
+   saveUninitialized :false,
+}))
+
+Secret : The secret is the method used to sign a secret key to the cookie;
+resave : If we want to create a session whenever the user visits the page , not considering the same page or same user .It can be used.
+saveUninitialized : If we are not modifying the session means we will be setting it to false.
+
+
+req.session.id and our req.session will have the same similiar ids and they will match each other.
+
+session store will be installed from the website and it will have the collection of the sessions.So we can access the sessions whenever we want.
+whenever the sessions are created the sessionstore can be accessed and used accordingly.
