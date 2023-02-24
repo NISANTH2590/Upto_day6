@@ -1,0 +1,32 @@
+Time : 5:36pm
+Agenda : Discussing about previous and current week topics 
+
+Question-1 : Magesh - which module can be imported in nodeJS to convert the output into coloured one.
+
+The module name is chalk. 
+
+Question-2 : 5.45pm - Gokul - difference between npm and npx 
+
+magesh , vignesh answered.Gokul added some more points to the answer.
+
+Question-3 : 5.49pm - Ramya - explain a function with two Callbacks 
+
+vignesh answered with an example.
+
+Question-4 : 5.55pm - Nisanth - explain about process.env and process.argv
+
+Question-5 : 6.01pm - Prabindh - explain IIFE 
+
+Question-6 : 6.03pm - vignesh - types of queue in event loops
+
+Question-7 : 6.09pm - gokul - WhyNodeJS other than other backends
+
+explained why nodeJS is more data intensive than other backends.
+
+Question-8 : 6.16pm - magesh - diff bw Object.freeze and const 
+
+Question-9 : 6.21pm - ramya - Iteration on objects
+
+Question-10 : 6.22pm - gokul - proxy,reflect
+
+Question-11 : 6.26pm - nisanth - peer dependencies

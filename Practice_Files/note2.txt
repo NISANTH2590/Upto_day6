@@ -1,0 +1,611 @@
+1.temporal deadzone
+ A temporal dead zone (TDZ) is the area of a block where a variable is inaccessible until the moment the computer completely initializes it with a value.
+
+2.Property flags
+ property flags includes 
+
+3.promisification
+function , callback , promises
+
+4.prototyping
+psrent will inherit child 
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Array Buffer :
+ The basic binary object is array buffer - a reference to fixed length of contiguous memory area;
+
+ let buffer = new ArrayBuffer(16);
+ console.log(buffer.byteLength); //16
+
+It has a fixed length, we can’t increase or decrease it.
+It takes exactly that much space in the memory.
+To access individual bytes, another “view” object is needed, not buffer[index].
+ArrayBuffer is Just a raw sequence of bytes.
+To manipulate an ArrayBuffer, we need to use a “view” object.
+A view object does not store anything on its own. It’s the “eyeglasses” that give an interpretation of the bytes stored in the ArrayBuffer.
+
+Uint8Array – treats each byte in ArrayBuffer as a separate number, with possible values from 0 to 255 (a byte is 8-bit, so it can hold only that much). Such value is called a “8-bit unsigned integer”.
+Uint16Array – treats every 2 bytes as an integer, with possible values from 0 to 65535. That’s called a “16-bit unsigned integer”.
+Uint32Array – treats every 4 bytes as an integer, with possible values from 0 to 4294967295. That’s called a “32-bit unsigned integer”.
+Float64Array – treats every 8 bytes as a floating point number with possible values from 5.0x10-324 to 1.8x10308
+
+
+Typed Array methods :
+We can iterate, map, slice, find, reduce etc.
+
+No splice – we can’t “delete” a value, because typed arrays are views on a buffer, and these are fixed, contiguous areas of memory. All we can do is to assign a zero.
+No concat method.
+
+There are two additional methods:
+arr.set(fromArr, [offset]) copies all elements from fromArr to the arr, starting at position offset (0 by default).
+arr.subarray([begin, end]) creates a new view of the same type from begin to end (exclusive). That’s similar to slice method (that’s also supported), but doesn’t copy anything – just creates a new view, to operate on the given piece of data.
+
+TEXT ENCODER AND DECODER : 
+Text decoder converts the bytes into string .
+let decoder = new TextDecoder([label],[options]);
+let uint8array = new Uint8Array([72, 101, 108, 108, 111]);
+console.log(TextDecoder().decode(uint8array)); //Hello
+
+Text encoder converts the string into bytes.
+let encoder = new TextEncoder();
+console.log(encoder.encode("Hello)); //72, 101, 108, 108, 111
+
+BLOB :
+blob is an array of blob/buffersource/string values.
+type of blob usually Eg : img/png
+
+the image can be converted into blob;
+blob can be also used as the url;
+blob can be also used as the text where the input string will be converted into ann utf8 format
+blob can be used as the array buffer.
+let us consider if we are writing and using the blob more than 2gb.If we use under the array buffer means it will lead to an tedious work.
+here comes the use of an stream
+
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+ES6 Features :
+
+Let , const, Arrow functions, For/Of , Map ,Set , WeakMap , WeakSet, 
+Spread operator(...)
+
+IsFinite() // returns true if it a finite value.
+IsNaN() // returns true if it is not a number.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+Array methods :
+Array.find(value); // This is used to find the element is available or not .
+Array.findIndex(value); // This is used to find the whether the array value is present in the given array or not. 
+Array.Keys(); // This will return the keys in a array.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+Math Functions : 
+Math.trunc() // This will return the integer part of the variable given. Like the integer in C programming.
+Math.sign() // This will return -1 if the number if negative , it returns 0 if the number is null, it returns 1 if the number is positive. , if undefined => NaN is returned.
+Math.cbrt() // cube root of x;
+Math.log2() //base2 log of x;
+Math.log10() //base10 log of x;
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+For/of will return the values available in the iterable object.
+const mypromise = return new Promise((res,rej)=>{
+    console.log("Hi");
+})
+
+mypromise.then((res,err)=>{
+    console.log("Hello");
+});
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+object.entries // it returns the keys and the values in the object.
+Modules // this will help in importing and exporting the data or values from one file to another files.
+we can use module.exports = variable // here the variable that we are trying to export will take place.
+we can use import variable = require("/path of the file");
+
+we can also export it using export keyword as follows:
+file.js
+let a = 10;
+let name = "Nishanth";
+export{a,name};
+
+file1.js
+import{a,name}from "file1.js"
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Eval :
+The Eval is used to evaluate a code of string .
+when we trying to run a command declared into a form of string the eval can be used to find its meaning.
+it starts to execute in a lexicographical environment;
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+Proxy :
+let proxy = new Proxy(target,handler);
+
+target = can be anything including functions;
+
+proxy is a thing that acts as a wrapper for an object. Intercept with the object and the operations that need to be performed with the object. 
+the target will have the object that we are going to access.
+the handler will have the handling functions that weare going to perform with the proxy.
+let proxy = new Proxy(obj,{
+    get: function(target,prop,receiver){
+    console.log(prop+" is being accessed");
+    return target[prop];
+    },
+    set:function(target,prop,value){
+        if(prop=='age' && value>20)
+        {
+            console.log(prop+" is being updated");
+            return target[prop] = value;
+        }
+        else{
+            console.log("Age cannot be updated ");
+        }
+
+    }
+    })
+
+Reflect :
+Reflect is a built-in object that simplifies creation of Proxy.
+
+It was said previously that internal methods, such as [[Get]], [[Set]] and others are specification-only, they can’t be called directly.
+
+The Reflect object makes that somewhat possible. Its methods are minimal wrappers around the internal methods.
+
+let user = {};
+
+Reflect.set(user, 'name', 'John');
+
+alert(user.name); // John
+
+Get:
+let user = {
+  _name: "Guest",
+  get name() {
+    return this._name;
+  }
+};
+
+let userProxy = new Proxy(user, {
+  get(target, prop, receiver) {
+    return target[prop];
+  }
+});
+
+alert(userProxy.name); // Guest
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Cookie : 
+The cookie is an small strings of data stored in the browser.Whenevr the user visits the same page or by using the same browser,the cookie will enable to understand its being the same user.
+for an example this call will set a cookie with a name and a value to it.
+document.cookie = "user=nishanth";
+console.log(document.cookie); //This will display the cookies that were available.
+
+The options are listed after key=value, delimited by ;(semicolon)
+document.cookie = "user=John; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT"
+
+Cookies has several options like path,domain,expires,max-age,
+path:
+path=/mypath
+The url path prefix must be absolute. It makes the cookie accessible for pages under that path. By default, it’s the current path.
+
+domain :
+domain = site.com
+A domain defines where the cookie is accessible. In practice though, there are limitations. We can’t set any domain.
+
+expires,max-age :
+if the created cookies doesnt has these options means they will be disapperead when the broswer is closed.
+
+we can let a cookie survie by using expires , max-age methods;
+
+Secure :
+the cookies can be sent over the https only.
+
+Delete cookie :
+To delete a cookie we can set the expire date to negative. expire or the max-age;
+
+
+The storage can be done in two ways session storage and local storage:
+
+the local storage is used to store the datas even when the browser is closed.
+the session storage is used to store the datas on the basis of the sessions.the data will be lost when the user tries to switch the tab. a new storage will be created for each tabs.
+
+localStorage.setItem("key","value");
+.setItem(key, value) – store key/value pair.
+.getItem(key) – get the value by key.
+.removeItem(key) – remove the key with its value.
+.clear() – delete everything.
+.key(index) – get the key on a given position.
+.length – the number of stored items.
+
+same methods for the session storage as well.
+
+Storage events will be triggerd when the storage methods are performed.
+
+Storage Events :
+
+When the data gets updated in localStorage or sessionStorage, storage event triggers, with properties:
+key – the key that was changed (null if .clear() is called).
+oldValue – the old value (null if the key is newly added).
+newValue – the new value (null if the key is removed).
+url – the url of the document where the update happened.
+storageArea – either localStorage or sessionStorage object where the update happened.
+
+Indexed Database:
+ It is a database that stores the data within the db ,much more stronger that the local storage.
+ IndexedDB is intended for offline apps, to be combined with ServiceWorkers and other technologies.
+
+Open database
+To start working with IndexedDB, we first need to open (connect to) a database.
+
+The syntax:
+
+let openRequest = indexedDB.open(name, version);
+db.createObjectStore('books', {keyPath: 'id'}); // the data can be stored in the object store format in the Indexed database.
+let deleteRequest = indexedDB.deleteDatabase(name);
+
+name – a string, the database name.
+version – a positive integer version, by default 1 (explained below). 
+
+Regular Expressions(RegEX):
+Patterns and flags
+Regular expressions are patterns that provide a powerful way to search and replace in text.
+
+Flags
+Regular expressions may have flags that affect the search.
+
+There are only 6 of them in JavaScript:
+i
+With this flag the search is case-insensitive: no difference between A and a (see the example below).
+g
+With this flag the search looks for all matches, without it – only the first match is returned.
+m
+Multiline mode (covered in the chapter Multiline mode of anchors ^ $, flag "m").
+s
+Enables “dotall” mode, that allows a dot . to match newline character \n (covered in the chapter Character classes).
+u
+Enables full Unicode support. The flag enables correct processing of surrogate pairs. More about that in the chapter Unicode: flag "u" and class \p{...}.
+y
+“Sticky” mode: searching at the exact position in the text (covered in the chapter Sticky flag "y", searching at position)
+
+Character classes :
+Most used are:
+
+\d (“d” is from “digit”)
+A digit: a character from 0 to 9.
+\s (“s” is from “space”)
+A space symbol: includes spaces, tabs \t, newlines \n and few other rare characters, such as \v, \f and \r.
+\w (“w” is from “word”)
+A “wordly” character: either a letter of Latin alphabet or a digit or an underscore _. Non-Latin letters (like cyrillic or hindi) do not belong to \w.
+
+Inverse classes
+For every character class there exists an “inverse class”, denoted with the same letter, but uppercased.
+
+The “inverse” means that it matches all other characters, for instance:
+\D
+Non-digit: any character except \d, for instance a letter.
+\S
+Non-space: any character except \s, for instance a letter.
+\W
+Non-wordly character: anything but \w, e.g a non-latin letter or a space.
+
+Anchors with ^ and $ tag:
+
+The caret ^ matches at the beginning of the text, and the dollar $ – at the end.
+
+Escaping:
+
+Let’s say we want to find literally a dot. Not “any character”, but just a dot.
+To use a special character as a regular one, prepend it with a backslash: \..
+That’s also called “escaping a character”.
+For example:
+alert( "Chapter 5.1".match(/\d\.\d/) ); // 5.1 (match!)
+alert( "Chapter 511".match(/\d\.\d/) ); // null (looking for a real dot \.)
+
+new RegExp
+If we are creating a regular expression with new RegExp, then we don’t have to escape /, but need to do some other escaping.
+For instance, consider this:
+let regexp = new RegExp("\d\.\d");
+alert( "Chapter 5.1".match(regexp) ); // null
+
+Sets:
+For instance, [eao] means any of the 3 characters: 'a', 'e', or 'o'.
+That’s called a set. Sets can be used in a regexp along with regular characters:
+// find [t or m], and then "op"
+alert( "Mop top".match(/[tm]op/gi) ); // "Mop", "top"
+
+Ranges:
+Square brackets may also contain character ranges.
+For instance, [a-z] is a character in range from a to z, and [0-5] is a digit from 0 to 5.
+In the example below we’re searching for "x" followed by two digits or letters from A to F:
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Async iterables :
+
+Asynchronous iteration is needed when values come asynchronously: after setTimeout or another kind of delay.
+The most common case is that the object needs to make a network request to deliver the next value, we’ll see a real-life example of it a bit later.
+
+To make an object iterable asynchronously:
+Use Symbol.asyncIterator instead of Symbol.iterator.
+The next() method should return a promise (to be fulfilled with the next value).
+The async keyword handles it, we can simply make async next().
+To iterate over such an object, we should use a for await (let item of iterable) loop
+
+Iterator example in generators : //by using symbol.iterator and for each 
+let range = {
+  from: 1,
+  to: 5,
+
+  *[Symbol.iterator]() { // a shorthand for [Symbol.iterator]: function*()
+    for(let value = this.from; value <= this.to; value++) {
+      yield value;
+    }
+  }
+};
+
+for(let value of range) {
+  alert(value); // 1, then 2, then 3, then 4, then 5
+}
+
+  // this line is same as [Symbol.asyncIterator]
+
+let range = {
+  from: 1,
+  to: 5,
+
+  // this line is same as [Symbol.asyncIterator]: async function*() {
+  async *[Symbol.asyncIterator]() {
+    for(let value = this.from; value <= this.to; value++) {
+
+      // make a pause between values, wait for something
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      yield value;
+    }
+  }
+};
+
+(async () => {
+
+  for await (let value of range) {
+    alert(value); // 1, then 2, then 3, then 4, then 5
+  }
+
+})();
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+JSON Web Tokens :
+It contains three parts :
+Headers+payload+signatures
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Reference Types :
+two types : Primitive values,Reference values
+Primitive values :
+primitive values only creates a copy of the value 
+Eg : let a = 10;
+let b = a; //this is primitive values
+Reference values :
+primitive values only creates a copy of the value 
+Eg : let arr = [1,2,3,4,5];
+let arr1 = arr;
+arr1[0] = 55;  //this is reference values (Now the arr becomes 55,2,3,4,5);
+
+line:
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+Differences between nodeJS and the browser :
+
+From the perspective of a frontend developer who extensively uses JavaScript, Node.js apps bring with them a huge advantage: 
+the comfort of programming everything - the frontend and the backend - in a single language.
+
+In the browser, most of the time what you are doing is interacting with the DOM, or other Web Platform APIs like Cookies. 
+Those do not exist in Node.js, of course. You don't have the document, window and all the other objects that are provided by the browser.
+
+Another big difference is that in Node.js you control the environment. 
+
+Another difference is that Node.js supports both the CommonJS and ES module systems (since Node.js v12), while in the browser we are starting to see the ES Modules standard being implemented.
+
+In practice, this means that you can use both require() and import in Node.js, while you are limited to import in the browser.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+Package.JSON File :
+
+Creating a default package.json file
+To create a default package.json using information extracted from the current directory, use the npm init command with the --yes or -y flag.
+
+Use npm to . . .
+Adapt packages of code for your apps, or incorporate packages as they are.
+Download standalone tools you can use right away.
+Run packages without downloading using npx.
+Share code with any npm user, anywhere.
+Restrict code to specific developers.
+Create organizations to coordinate package maintenance, coding, and developers.
+Form virtual teams by using organizations.
+Manage multiple versions of code and code dependencies.
+Update applications easily when underlying code is updated.
+Discover multiple ways to solve the same puzzle.
+Find other developers who are working on similar problems and projects.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Why NODEJS :
+Node.js is a single-threaded, open-source, cross-platform runtime environment for building fast and scalable server-side and networking applications.
+It runs on the V8 JavaScript runtime engine, and it uses event-driven, non-blocking I/O architecture, which makes it efficient and suitable for real-time applications.
+
+NodeJS Architecture :
+Node.js uses the “Single Threaded Event Loop” architecture to handle multiple clients at the same time.
+To understand how this is different from other runtimes, we need to understand how multi-threaded concurrent clients are handled in languages like Java.
+
+In a multi-threaded request-response model, multiple clients send a request, and the server processes each one before sending the response back. However, multiple threads are used to process concurrent calls.
+These threads are defined in a thread pool, and each time a request comes in, an individual thread is assigned to handle it.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Event Loop :
+event loop is a collection of code , executions , events , executing sub queued tasks. The messages are added to the message queue whenever the event is fired or event is with an event handler.
+the messages will be added in the message queue and then send into the function stack fopr execution.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Features of js :
+Easy—Node.js is quite easy to start with. It’s a go-to choice for web development beginners. With a lot of tutorials and a large community—getting started is very easy.
+Scalable—It provides vast scalability for applications. Node.js, being single-threaded, is capable of handling a huge number of simultaneous connections with high throughput.
+Speed—Non-blocking thread execution makes Node.js even faster and more efficient.
+Packages—A vast set of open-source Node.js packages is available that can simplify your work. There are more than one million packages in the NPM ecosystem today.
+Strong backend—Node.js is written in C and C++, which makes it speedy and adds features like networking support.
+Multi-platform—Cross-platform support allows you to create SaaS websites, desktop apps, and even mobile apps, all using Node.js.
+Maintainable—Node.js is an easy choice for developers since both the frontend and backend can be managed with JavaScript as a single language.
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Explanation Of Hello World Server:
+
+Node.js comes with a built-in module called “HTTP” which allows Node.js to transfer data over the HyperText Transfer Protocol (HTTP).
+In the code above, we first load the http module in our program. Then we use the createServer method to accept a request and return a response with a status code.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+File Structure of Node Js App :
+
+App.js - This is the entry point for the Node app
+Controllers - This folder contains the business logic to the programs.For example if we are taking the user controller means the file should be named as usercontroller.js
+models - This is the folder that contains all the database models.
+routes - this folder consists routing files like api calls .User routing functionality should go into UserRouter.js
+Public:- All the public files such as images, javascript files, CSS files should go into this folder. You should divide your files into their own folder.
+Views:- So this folder contains all your views i.e. HTML/ejs files. Drop this folder if you are building rest API’s.
+config.js:- This file should contain all your configuration e.g. PORT number, secrets, keys etc. Do
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Debugger :
+
+The debugger is used to debug the exection of the program by using the breakpoints.Initially the node app will have the breakpoint at the top of the execution of the file.
+c or cont: Continue execution to the next breakpoint or to the end of the program.
+n or next: Move to the next line of code.
+s or step: Step into a function. By default, we only step through code in the block or scope we’re debugging. By stepping into a function, we can inspect the code of the function our code calls and observe how it reacts to our data.
+o: Step out of a function. After stepping into a function, the debugger goes back to the main file when the function returns. We can use this command to go back to the original function we were debugging before the function has finished execution.
+pause: Pause the running code.
+The keyword debugger can act as a breakpoint in the code.
+Add a watcher for the variable so we can see what’s being returned:
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Event Loop Explained
+When Node.js starts, it initializes the event loop, processes the provided input script (or drops into the REPL, which is not covered in this document) which may make async API calls, schedule timers, or call process.nextTick(),then begins processing the event loop.
+
+Each phase has a FIFO queue of callbacks to execute. While each phase is special in its own way, generally, when the event loop enters a given phase, it will perform any operations specific to that phase, then execute callbacks in that phase's queue until the queue has been exhausted or the maximum number of callbacks has executed. 
+When the queue has been exhausted or the callback limit is reached, the event loop will move to the next phase, and so on.
+timers: this phase executes callbacks scheduled by setTimeout() and setInterval().
+pending callbacks: executes I/O callbacks deferred to the next loop iteration.
+idle, prepare: only used internally.
+poll: retrieve new I/O events; execute I/O related callbacks (almost all with the exception of close callbacks, the ones scheduled by timers, and setImmediate()); node will block here when appropriate.
+check: setImmediate() callbacks are invoked here.
+close callbacks: some close callbacks, e.g. socket.on('close', ...).
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+
+REPL (Read evaluate print Loop) :
+It takes an single expression as a user input and returns the result back to the console after the execution.It provides a quickest way to handle the simple javascript codes.
+We cannot use window and document.It sends error when using those objects.
+we can use it in bash window and it is interactive.
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+The Console Object :
+The console object provides access to the browser's debugging console.
+The console object is a property of the window object.
+The console object is accessed with:
+window.console or just console
+
+Console Object Methods :
+Method	      Description
+assert()	Writes an error message to the console if a assertion is false
+clear()	Clears the console
+count()	Logs the number of times that this particular call to count() has been called
+error()	Outputs an error message to the console
+group()	Creates a new inline group in the console. This indents following console messages by an additional level, until console.groupEnd() is called
+groupCollapsed()	Creates a new inline group in the console. However, the new group is created collapsed. The user will need to use the disclosure button to expand it
+groupEnd()	Exits the current inline group in the console
+info()	Outputs an informational message to the console
+log()	Outputs a message to the console
+table()	Displays tabular data as a table
+time()	Starts a timer (can track how long an operation takes)
+timeEnd()	Stops a timer that was previously started by console.time()
+trace()	Outputs a stack trace to the console
+warn()	Outputs a warning message to the console
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+ 
+Process Objects :
+The process object are the one of the global object they can be used in any module without directly importing it.For example if we are using the process.env object means , it can be used to access the environment variables within the folder with extensions .env
+They are the instance of an event emitters.
+
+Environment variables .env:
+this is used to create a environment files.They are mainly used to access the database , user credentials etc., for safer reasons.
+these environment variables under the env files can be accessed by using dotenv package. config method.
+so that they can be accessed and used later.They are case sensititve in nature.
+we can also delete an env variable in environmanet variable folder.
+
+.argv :
+The argv generally refers to the arguments , which stores the arguments of the command line arguments in the form of an array.
+By accessing the first element of the array we can access the executable path.The executable path contains the parent folder location of the node where it has been installed.
+the next argument will be the current file directory. The directory of the file which has been currently executed.
+
+process.on :
+It is used to handle the triggered events with some functions that we need to perform.It is generally like catching a event and performing operations regarding to the event.
+Events that are going to trigger and handled.
+Event: 'beforeExit'
+Event: 'disconnect'
+Event: 'exit'
+Event: 'message'
+Event: 'multipleResolves'
+Event: 'rejectionHandled'
+Event: 'uncaughtException'
+Warning: Using 'uncaughtException' correctly
+Event: 'uncaughtExceptionMonitor'
+Event: 'unhandledRejection'
+Event: 'warning'
+Event: 'worker'
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Difference between npm and npx :
+
+The npm is used to install a package and execute it.But when we use npx we can directly work with the packages without install
+The npm can be used to install and work with the packages globally where the npx is used to execute those packages, if those packages arent available it will install them automatically.
+The packages installed using npm will be installed gloabally where the packages executed by the npx are not installed globally.
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Dependencies and Dev dependencies :
+
+There are three dependencies available in the nodejs they are dependencies,dev dependencies and peer dependencies.
+
+command to use dev dependency :
+npm nodemon --save-dev // This will install the nodemon under th developer;s dependencies.so that it cannot be used in the production or testing purposes.
+
+peer dependency :
+The peer dependency will specify that your package is compatible only with specific npm package versions.
+we can change the package.json manually.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+The "ReferenceError: require is not defined" error occurs when the require function is used in a JavaScript file that is intended to be executed in a web browser, rather than in a Node.js environment.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+import chalk from 'chalk';
+console.log(chalk.blue("Hello Nishanth));
+
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+HTTP :
+Http comes to action where we need to establish the communication between the server and the client. The client sends an http request and the server sends an http response.
+The node has the access to connect to operating system functionality like networking.
+The node also has the action to run asynchronously by using an event loop which can handle large number of requests.
+
+There is a built-in module in the nodejs called as http.The http module is used to transfer the data.
+The first argument of the res.writeHead() method is the status code, 200 means that all is OK, the second argument is an object containing the response headers.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+Stream and Buffer :
+
+Readable streams → To create a stream of data for reading (say, reading a large file in chunks).
+Writable streams → To create a stream of data for writing (say, writing a large amount of data to a file).
+Duplex streams → To create a stream that is both readable and writable at the same time. We can read and write to a duplex stream (say, a socket connection between a client and a server).
+Transform streams → To create a stream that is readable and writable, but the data can be modified while reading and writing to the stream (say, compressing data by the client and server before while requesting).
+
+A buffer is a temporary memory that is kept by the stream until the operation is completed.
+_ _ _ _ __ _ _ _ _ __ _ _ _  __ _ _ _ _ _ __ _ _ _ _ __ _ _ _ _ _ _ _ _ _ _  _ _ _ _ _ _ _ _ _ _ _ _ _ 

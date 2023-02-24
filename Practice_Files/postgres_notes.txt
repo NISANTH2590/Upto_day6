@@ -1,0 +1,24 @@
+Installing Postgres :
+
+$sudo apt update
+$sudo apt install postgresql postgresql-contrib\
+$sudo systemctl start postgresql.service
+
+Switching Over to the postgres Account :
+sudo -i -u postgres
+psql
+\q     //Exit out of the PostgreSQL prompt by typing:
+
+Step 3 — Creating a New Role
+Currently, you just have the postgres role configured within the database. You can create new roles from the command line with the createrole command. The --interactive flag will prompt you for the name of the new role and also ask whether it should have superuser permissions.
+
+If you are logged in as the postgres account, you can create a new user by typing:
+
+createuser --interactive
+
+ALTER USER postgres PASSWORD "1234"
+
+
+Password for postgres is : 1234
+ sudo -u postgres psql
+https://www.postgresqltutorial.com/postgresql-cheat-sheet/
